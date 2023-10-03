@@ -70,7 +70,7 @@ def expand_features(embedding, target_length):
         expanded_embedding = np.pad(expanded_embedding, (0, target_length - len(expanded_embedding)))
     return expanded_embedding
 
-@app.post("/v1/embeddings", response_model=EmbeddingResponse)
+@app.post("/v1/embeddings", response_model=EmbeddingResponse, dependencies=[Depends(verify_token)])
 async def get_embeddings(request: Union[EmbeddingProcessRequest, EmbeddingQuestionRequest]):
     #data = await request.body()
     #print(data)
